@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmvf1i0fup5ch"]
+
+[ext_resource type="PackedScene" uid="uid://dolga7ocahq5x" path="res://scenes/component/projectile_spawner_component.tscn" id="1_v0l1u"]
+[ext_resource type="PackedScene" uid="uid://b7dgn2u83lt4v" path="res://scenes/game_object/projectile/projectile.tscn" id="2_kmtcr"]
+[ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="3_2rg7f"]
+[ext_resource type="PackedScene" uid="uid://been2q7k2hj3i" path="res://scenes/component/range_component.tscn" id="4_tk0hh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oy55j"]
+
+[node name="Gun" type="Node2D"]
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+
+[node name="Marker2D" type="Marker2D" parent="Pivot"]
+
+[node name="ProjectileSpawnerComponent" parent="." node_paths=PackedStringArray("spawn_offset", "rotation_component") instance=ExtResource("1_v0l1u")]
+projectile_scene = ExtResource("2_kmtcr")
+spawn_offset = NodePath("../Pivot/Marker2D")
+rotation_component = NodePath("../RotationComponent")
+
+[node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("3_2rg7f")]
+pivot_node = NodePath("../Pivot")
+
+[node name="RangeComponent" parent="." instance=ExtResource("4_tk0hh")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeComponent"]
+shape = SubResource("CircleShape2D_oy55j")

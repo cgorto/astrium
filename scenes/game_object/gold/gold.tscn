@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://wxellcjqsidr"]
+[gd_scene load_steps=5 format=3 uid="uid://wxellcjqsidr"]
 
 [ext_resource type="Script" path="res://scenes/game_object/gold/gold.gd" id="1_fkleu"]
+[ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="2_7cmgr"]
+[ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="2_rukk2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cb71g"]
 
@@ -11,3 +13,9 @@ script = ExtResource("1_fkleu")
 shape = SubResource("CircleShape2D_cb71g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.135, 0.135)
+texture = ExtResource("2_7cmgr")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_rukk2")]
+max_speed = 1000
+acceleration = 20.0

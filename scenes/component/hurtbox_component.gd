@@ -2,7 +2,7 @@ class_name HurtboxComponent extends Area2D
 
 signal hit
 
-@export var health_component: Node
+@export var health_component: HealthComponent
 
 func on_area_entered(other_area:Area2D) -> void:
 	if not other_area is HitboxComponent:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cosksya8rw27g"]
+[gd_scene load_steps=15 format=3 uid="uid://cosksya8rw27g"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_7hsfj"]
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_37tc3"]
@@ -7,10 +7,26 @@
 [ext_resource type="PackedScene" uid="uid://c7rtcedycu7kt" path="res://scenes/component/hurtbox_component.tscn" id="3_wegcm"]
 [ext_resource type="Texture2D" uid="uid://cyommen8wp42c" path="res://scenes/game_object/player/ship_0004.png" id="4_ik7p1"]
 [ext_resource type="Script" path="res://scenes/component/movement_component/player_movement_component.gd" id="4_u57ri"]
+[ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="6_22yo7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75bju"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iarlc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uojid"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2vbv2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jpmb"]
+bg_color = Color(0.407843, 0.0980392, 0.0862745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfv3k"]
+bg_color = Color(0.419608, 1, 0.701961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.407843, 0.0980392, 0.0862745, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
@@ -25,7 +41,13 @@ max_speed = 500
 script = ExtResource("4_u57ri")
 velocity_component = NodePath("../VelocityComponent")
 
+[node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("6_22yo7")]
+pivot_node = NodePath("../Visuals")
+rotation_speed = 20.0
+
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_wegcm")]
+collision_layer = 0
+collision_mask = 2
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -34,8 +56,40 @@ shape = SubResource("CircleShape2D_75bju")
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+rotation = 1.5708
 texture = ExtResource("4_ik7p1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_iarlc")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("CircleShape2D_uojid")
+
+[node name="AttractionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttractionArea"]
+shape = SubResource("CircleShape2D_2vbv2")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(32, 6)
+offset_left = -16.0
+offset_top = -25.0
+offset_right = 16.0
+offset_bottom = -19.0
+pivot_offset = Vector2(16, 3)
+theme_override_styles/background = SubResource("StyleBoxFlat_5jpmb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mfv3k")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_area_entered"]
+[connection signal="area_entered" from="AttractionArea" to="." method="_on_attraction_area_area_entered"]

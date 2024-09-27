@@ -26,3 +26,8 @@ func check_death() -> void:
 		died.emit()
 		owner.queue_free()
 		#maybe just queuefree here, maybe do other stuff
+
+func get_health_percent() -> int:
+	if max_health <= 0:
+		return 0
+	return min(current_health / max_health, 1)
