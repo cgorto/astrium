@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dlhs5usxgosa1"]
+
+[ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="1_dut1u"]
+[ext_resource type="Script" path="res://scenes/game_object/last_hit_orb/last_hit_orb.gd" id="1_t43fb"]
+[ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="2_1rge2"]
+[ext_resource type="PackedScene" uid="uid://3m23b2v7bw1k" path="res://scenes/component/gold_drop_component.tscn" id="4_o0lko"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8a4b"]
+
+[node name="LastHitOrb" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_t43fb")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_1rge2")]
+max_health = 1
+
+[node name="GoldDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_o0lko")]
+drop_percent = 1.0
+health_component = NodePath("../HealthComponent")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_dut1u")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_y8a4b")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

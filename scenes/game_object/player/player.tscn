@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://cosksya8rw27g"]
+
+[ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_7hsfj"]
+[ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_37tc3"]
+[ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="2_uivue"]
+[ext_resource type="PackedScene" uid="uid://nykeratlgruo" path="res://scenes/component/movement_component/movement_component.tscn" id="3_aa18a"]
+[ext_resource type="PackedScene" uid="uid://c7rtcedycu7kt" path="res://scenes/component/hurtbox_component.tscn" id="3_wegcm"]
+[ext_resource type="Texture2D" uid="uid://cyommen8wp42c" path="res://scenes/game_object/player/ship_0004.png" id="4_ik7p1"]
+[ext_resource type="Script" path="res://scenes/component/movement_component/player_movement_component.gd" id="4_u57ri"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75bju"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iarlc"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_7hsfj")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_37tc3")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_uivue")]
+max_speed = 500
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("3_aa18a")]
+script = ExtResource("4_u57ri")
+velocity_component = NodePath("../VelocityComponent")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_wegcm")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_75bju")
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+texture = ExtResource("4_ik7p1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_iarlc")

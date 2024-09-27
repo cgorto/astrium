@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dolga7ocahq5x"]
+
+[ext_resource type="Script" path="res://scenes/component/projectile_spawner_component.gd" id="1_6rduw"]
+
+[node name="ProjectileSpawnerComponent" type="Node"]
+script = ExtResource("1_6rduw")
+spread_angle = null
+proj_per_shot = null
