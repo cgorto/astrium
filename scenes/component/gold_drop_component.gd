@@ -8,7 +8,7 @@ extends Node
 func _ready() -> void:
 	(health_component as HealthComponent).died.connect(on_died)
 	
-func on_died() -> void:
+func on_died(thing_died: Node2D) -> void:
 	var adjusted_drop_percent:= drop_percent
 	
 	if randf() > adjusted_drop_percent:
@@ -22,7 +22,7 @@ func on_died() -> void:
 		
 	var spawn_position: Vector2 = (owner as Node2D).global_position
 	var gold_instance: Node2D = gold_scene.instantiate() as Node2D
-	var entities_layer: Node2D = get_tree().get_first_node_in_group("entities_layer") #Maybe make this an autoload idk
+	var entities_layer: Node = get_tree().current_scene #Maybe make this an autoload idk
 	entities_layer.add_child(gold_instance)
 	gold_instance.global_position = spawn_position
 	

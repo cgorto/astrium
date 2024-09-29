@@ -14,7 +14,7 @@ var time_alive: float = 0
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var click_area: CollisionShape2D = $CollisionShape2D
 @onready var health_component: HealthComponent = $HealthComponent
-@onready var velocity_component: Node = $VelocityComponent
+@onready var velocity_component: VelocityComponent = $VelocityComponent
 
 func _ready() -> void:
 	current_value = initial_value

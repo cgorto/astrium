@@ -1,7 +1,7 @@
 extends Node
 class_name HealthComponent
 
-signal died
+signal died(thing_died: Node2D)
 signal health_changed
 signal health_decreased
 
@@ -23,11 +23,12 @@ func heal(heal_amount: int) -> void:
 	
 func check_death() -> void:
 	if current_health == 0:
-		died.emit()
+		died.emit(owner)
 		owner.queue_free()
 		#maybe just queuefree here, maybe do other stuff
 
-func get_health_percent() -> int:
+func get_health_percent() -> float:
 	if max_health <= 0:
 		return 0
-	return min(current_health / max_health, 1)
+
+	return min((current_health as float) / (max_health as float),1)

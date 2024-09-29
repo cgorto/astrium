@@ -1,34 +1,48 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmvf1i0fup5ch"]
+[gd_scene load_steps=9 format=3 uid="uid://bmvf1i0fup5ch"]
 
+[ext_resource type="Script" path="res://scenes/game_object/weapon/gun.gd" id="1_hknbi"]
 [ext_resource type="PackedScene" uid="uid://dolga7ocahq5x" path="res://scenes/component/projectile_spawner_component.tscn" id="1_v0l1u"]
 [ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="1_xj12a"]
 [ext_resource type="PackedScene" uid="uid://b7dgn2u83lt4v" path="res://scenes/game_object/projectile/projectile.tscn" id="2_kmtcr"]
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="3_2rg7f"]
 [ext_resource type="PackedScene" uid="uid://been2q7k2hj3i" path="res://scenes/component/range_component.tscn" id="4_tk0hh"]
+[ext_resource type="PackedScene" uid="uid://cbuvjywj3yrf3" path="res://scenes/component/targeting_component.tscn" id="5_msr53"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oy55j"]
 
 [node name="Gun" type="Node2D"]
+script = ExtResource("1_hknbi")
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-position = Vector2(0, -9)
+position = Vector2(10, 0)
+rotation = 1.5708
 scale = Vector2(0.03125, 0.152344)
 texture = ExtResource("1_xj12a")
 
 [node name="Marker2D" type="Marker2D" parent="Pivot"]
-position = Vector2(0, -18.53)
+position = Vector2(19, 0)
 
 [node name="ProjectileSpawnerComponent" parent="." node_paths=PackedStringArray("spawn_offset", "rotation_component") instance=ExtResource("1_v0l1u")]
 projectile_scene = ExtResource("2_kmtcr")
 spawn_offset = NodePath("../Pivot/Marker2D")
 rotation_component = NodePath("../RotationComponent")
+proj_speed = 1000
 
 [node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("3_2rg7f")]
 pivot_node = NodePath("../Pivot")
+rotation_speed = 50.0
+
+[node name="TargetingComponent" parent="." node_paths=PackedStringArray("range_component") instance=ExtResource("5_msr53")]
+range_component = NodePath("../RangeComponent")
 
 [node name="RangeComponent" parent="." instance=ExtResource("4_tk0hh")]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeComponent"]
 shape = SubResource("CircleShape2D_oy55j")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

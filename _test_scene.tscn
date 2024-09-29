@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfx38vly7kjfg"]
+
+[ext_resource type="PackedScene" uid="uid://cosksya8rw27g" path="res://scenes/game_object/player/player.tscn" id="1_47bue"]
+[ext_resource type="PackedScene" uid="uid://bmvf1i0fup5ch" path="res://scenes/game_object/weapon/gun.tscn" id="2_uv2pj"]
+[ext_resource type="PackedScene" uid="uid://cwegtty4ubuew" path="res://scenes/game_object/basic_enemy/basic_enemy.tscn" id="3_1ie58"]
+[ext_resource type="PackedScene" uid="uid://dlhs5usxgosa1" path="res://scenes/game_object/last_hit_orb/last_hit_orb.tscn" id="4_q6riv"]
+
+[node name="TestScene" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_47bue")]
+position = Vector2(304, 291)
+
+[node name="Gun" parent="Player" instance=ExtResource("2_uv2pj")]
+
+[node name="BasicEnemy" parent="." instance=ExtResource("3_1ie58")]
+position = Vector2(777, 230)
+
+[node name="LastHitOrb" parent="." instance=ExtResource("4_q6riv")]
+position = Vector2(473, 365)
+
+[node name="LastHitOrb2" parent="." instance=ExtResource("4_q6riv")]
+position = Vector2(512, 204)
+
+[node name="LastHitOrb3" parent="." instance=ExtResource("4_q6riv")]
+position = Vector2(721, 428)
+
+[node name="LastHitOrb4" parent="." instance=ExtResource("4_q6riv")]
+position = Vector2(669, 315)

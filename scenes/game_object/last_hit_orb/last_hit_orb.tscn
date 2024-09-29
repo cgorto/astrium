@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlhs5usxgosa1"]
+[gd_scene load_steps=8 format=3 uid="uid://dlhs5usxgosa1"]
 
 [ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="1_dut1u"]
 [ext_resource type="Script" path="res://scenes/game_object/last_hit_orb/last_hit_orb.gd" id="1_t43fb"]
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="2_1rge2"]
+[ext_resource type="PackedScene" uid="uid://wxellcjqsidr" path="res://scenes/game_object/gold/gold.tscn" id="4_ehtn0"]
 [ext_resource type="PackedScene" uid="uid://3m23b2v7bw1k" path="res://scenes/component/gold_drop_component.tscn" id="4_o0lko"]
+[ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="6_5c26e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y8a4b"]
 
@@ -17,10 +19,14 @@ max_health = 1
 [node name="GoldDropComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_o0lko")]
 drop_percent = 1.0
 health_component = NodePath("../HealthComponent")
+gold_scene = ExtResource("4_ehtn0")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_dut1u")]
+max_speed = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.215, 0.215)
+texture = ExtResource("6_5c26e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_y8a4b")
