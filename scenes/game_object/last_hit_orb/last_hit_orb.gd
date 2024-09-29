@@ -24,7 +24,7 @@ func _ready() -> void:
 	velocity_component.velocity = Vector2.RIGHT.rotated(randf()*2*PI)*initial_speed
 
 func _physics_process(delta: float) -> void:
-	position += velocity_component.velocity
+	position += velocity_component.velocity *delta
 	velocity_component.decelerate()
 	
 	time_alive += delta
