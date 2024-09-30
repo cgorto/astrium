@@ -22,7 +22,7 @@ func _ready() -> void:
 	lifetime = randf_range(2,4)
 	initial_speed = randf_range(150,250)
 	friction = randf_range(5,15)
-	velocity_component.velocity = Vector2.RIGHT.rotated(randf()*2*PI)*initial_speed
+	velocity_component.velocity = Vector2.RIGHT.rotated(randf()*TAU)*initial_speed
 
 func _physics_process(delta: float) -> void:
 	velocity_component.move(self)
