@@ -11,6 +11,7 @@
 
 [node name="LastHitOrb" type="Area2D"]
 collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_t43fb")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_1rge2")]
@@ -22,7 +23,8 @@ health_component = NodePath("../HealthComponent")
 gold_scene = ExtResource("4_ehtn0")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_dut1u")]
-max_speed = 1
+max_speed = 400
+acceleration = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.215, 0.215)

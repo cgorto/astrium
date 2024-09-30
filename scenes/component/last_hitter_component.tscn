@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://du42tp6lyy417"]
+
+[ext_resource type="Script" path="res://scenes/component/last_hitter_component.gd" id="1_17rvo"]
+[ext_resource type="Texture2D" uid="uid://c4ge8veckfp8k" path="res://scenes/new_gradient_texture_1d.tres" id="2_57kyf"]
+
+[node name="LastHitterComponent" type="Node2D"]
+script = ExtResource("1_17rvo")
+
+[node name="MissCooldown" type="Timer" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+width = 4.0
+texture = ExtResource("2_57kyf")
+texture_mode = 2
+
+[node name="VisibleTimer" type="Timer" parent="Line2D"]
+wait_time = 0.1
+
+[connection signal="timeout" from="Line2D/VisibleTimer" to="." method="_on_visible_timer_timeout"]
