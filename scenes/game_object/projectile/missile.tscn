@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0v5vba2cndww"]
+[gd_scene load_steps=11 format=3 uid="uid://d0v5vba2cndww"]
 
 [ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="1_flc1l"]
 [ext_resource type="Script" path="res://scenes/game_object/projectile/missile.gd" id="1_ndat8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="4_ohs1a"]
 [ext_resource type="PackedScene" uid="uid://lepdapn4l4b4" path="res://scenes/component/hitbox_component.tscn" id="5_aob0v"]
 [ext_resource type="PackedScene" uid="uid://dd8uaje5u4kvn" path="res://scenes/component/aoe_component.tscn" id="7_ic24g"]
+[ext_resource type="PackedScene" uid="uid://dysgtck1tag0j" path="res://scenes/game_object/aoe/aoe.tscn" id="9_hpp5f"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lxb2p"]
 radius = 30.0
@@ -51,6 +52,7 @@ damage = 30
 shape = SubResource("CircleShape2D_lxb2p")
 
 [node name="AOEComponent" parent="." instance=ExtResource("7_ic24g")]
+aoe_scene = ExtResource("9_hpp5f")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]

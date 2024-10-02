@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="6_5c26e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y8a4b"]
+radius = 21.095
 
 [node name="LastHitOrb" type="Area2D"]
 collision_layer = 8
