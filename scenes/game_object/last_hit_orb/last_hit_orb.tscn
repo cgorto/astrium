@@ -21,7 +21,6 @@ max_health = 1
 drop_percent = 1.0
 health_component = NodePath("../HealthComponent")
 gold_scene = ExtResource("4_ehtn0")
-multi_drop = true
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_dut1u")]
 max_speed = 400

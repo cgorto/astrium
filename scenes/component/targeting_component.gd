@@ -7,10 +7,13 @@ signal target_changed(new_target: Node2D)
 var target: Node2D
 
 func _process(delta: float) -> void:
-	if target == null or not is_instance_valid(target) or not target in range_component.in_range:
-		select_target()
+	if range_component != null:
+		if target == null or not is_instance_valid(target) or not target in range_component.in_range:
+			select_target()
 		
 func select_target() -> void:
+	if range_component == null:
+		return
 	var previous_target: Node2D = target
 	if not range_component.in_range.is_empty():
 		target = range_component.in_range[0]

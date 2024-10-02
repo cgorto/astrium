@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://d0v5vba2cndww"]
+
+[ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="1_flc1l"]
+[ext_resource type="Script" path="res://scenes/game_object/projectile/missile.gd" id="1_ndat8"]
+[ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="2_mqu8s"]
+[ext_resource type="PackedScene" uid="uid://cbuvjywj3yrf3" path="res://scenes/component/targeting_component.tscn" id="3_g3ycj"]
+[ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="4_2obxo"]
+[ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="4_ohs1a"]
+[ext_resource type="PackedScene" uid="uid://lepdapn4l4b4" path="res://scenes/component/hitbox_component.tscn" id="5_aob0v"]
+[ext_resource type="PackedScene" uid="uid://dd8uaje5u4kvn" path="res://scenes/component/aoe_component.tscn" id="7_ic24g"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lxb2p"]
+radius = 30.0
+
+[node name="Missile" type="Node2D"]
+script = ExtResource("1_ndat8")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_flc1l")]
+max_speed = 600
+
+[node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("2_mqu8s")]
+pivot_node = NodePath("../Pivot")
+rotation_speed = 20.0
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="TrailComponent" parent="Pivot" instance=ExtResource("4_2obxo")]
+width = 5.2
+is_emitting = true
+resolution = 10.0
+lifetime = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(0, 4.76837e-07)
+scale = Vector2(0.2, 0.0625)
+texture = ExtResource("4_ohs1a")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="TargetingComponent" parent="." instance=ExtResource("3_g3ycj")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("5_aob0v")]
+collision_layer = 4
+collision_mask = 4
+damage = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_lxb2p")
+
+[node name="AOEComponent" parent="." instance=ExtResource("7_ic24g")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]

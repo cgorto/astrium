@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://du42tp6lyy417"]
+[gd_scene load_steps=4 format=3 uid="uid://du42tp6lyy417"]
 
 [ext_resource type="Script" path="res://scenes/component/last_hitter_component.gd" id="1_17rvo"]
-[ext_resource type="Texture2D" uid="uid://c4ge8veckfp8k" path="res://scenes/new_gradient_texture_1d.tres" id="2_57kyf"]
+
+[sub_resource type="Gradient" id="Gradient_xe656"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.278431, 0.2, 1, 1, 0.917647, 0.443137, 0.545098, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_268yk"]
+gradient = SubResource("Gradient_xe656")
+fill_from = Vector2(1, 1)
+fill_to = Vector2(1, 0.5)
+repeat = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 8
 
 [node name="LastHitterComponent" type="Node2D"]
 script = ExtResource("1_17rvo")
@@ -10,9 +21,11 @@ script = ExtResource("1_17rvo")
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
-width = 4.0
-texture = ExtResource("2_57kyf")
+width = 8.0
+texture = SubResource("GradientTexture2D_268yk")
 texture_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="VisibleTimer" type="Timer" parent="Line2D"]
 wait_time = 0.1

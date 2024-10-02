@@ -5,6 +5,7 @@ class_name DropOnDeathComponent extends Node
 @export var health_component: HealthComponent
 @export var gold_scene: PackedScene
 @export var multi_drop: bool = false
+@export var multi_drop_amt: int = 3
 
 func _ready() -> void:
 	(health_component as HealthComponent).died.connect(on_died)
@@ -22,7 +23,7 @@ func on_died(thing_died: Node2D) -> void:
 		return
 		
 	var spawn_position: Vector2 = (owner as Node2D).global_position
-	var multi_drop_loop: int = 5 if multi_drop else 1
+	var multi_drop_loop: int = multi_drop_amt if multi_drop else 1
 	var entities_layer: Node = get_tree().current_scene
 	for i in range(multi_drop_loop):
 		

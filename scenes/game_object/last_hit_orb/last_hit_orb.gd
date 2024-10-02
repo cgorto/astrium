@@ -1,6 +1,7 @@
 class_name LastHitOrb extends Area2D
 
 signal orb_popped(popped: LastHitOrb)
+signal last_hitted(popped: LastHitOrb)
 
 @export var initial_value: int = 1
 @export var max_value: int = 5
@@ -16,6 +17,7 @@ var time_alive: float = 0
 @onready var click_area: CollisionShape2D = $CollisionShape2D
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var velocity_component: VelocityComponent = $VelocityComponent
+@onready var drop_on_death: DropOnDeathComponent = $DropOnDeathComponent
 
 func _ready() -> void:
 	current_value = initial_value
@@ -34,5 +36,6 @@ func _physics_process(delta: float) -> void:
 		health_component.damage(1)
 		
 func last_hit() -> void:
-	print("last hit")
+	drop_on_death.multi_drop = true
 	health_component.damage(1)
+	last_hitted.emit(self)

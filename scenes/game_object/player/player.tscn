@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cosksya8rw27g"]
+[gd_scene load_steps=17 format=3 uid="uid://cosksya8rw27g"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_7hsfj"]
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_37tc3"]
+[ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="2_twhd4"]
 [ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="2_uivue"]
 [ext_resource type="PackedScene" uid="uid://nykeratlgruo" path="res://scenes/component/movement_component/movement_component.tscn" id="3_aa18a"]
 [ext_resource type="PackedScene" uid="uid://c7rtcedycu7kt" path="res://scenes/component/hurtbox_component.tscn" id="3_wegcm"]
@@ -9,6 +10,7 @@
 [ext_resource type="Script" path="res://scenes/component/movement_component/player_movement_component.gd" id="4_u57ri"]
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="6_22yo7"]
 [ext_resource type="PackedScene" uid="uid://dhm4vdomkwy7m" path="res://scenes/component/health_bar_component.tscn" id="9_s7vg0"]
+[ext_resource type="PackedScene" uid="uid://bhvrvgt71kv" path="res://scenes/game_object/weapon/missile_launcher.tscn" id="10_20voq"]
 [ext_resource type="PackedScene" uid="uid://du42tp6lyy417" path="res://scenes/component/last_hitter_component.tscn" id="10_s12ey"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75bju"]
@@ -24,6 +26,12 @@ radius = 150.0
 motion_mode = 1
 script = ExtResource("1_7hsfj")
 
+[node name="TrailComponent" parent="." instance=ExtResource("2_twhd4")]
+z_index = -1
+is_emitting = true
+
+[node name="LastHitterComponent" parent="." instance=ExtResource("10_s12ey")]
+
 [node name="HealthComponent" parent="." instance=ExtResource("1_37tc3")]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_uivue")]
@@ -38,12 +46,18 @@ pivot_node = NodePath("../Visuals")
 rotation_speed = 20.0
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_wegcm")]
+visible = false
 collision_layer = 0
 collision_mask = 2
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("CircleShape2D_75bju")
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="MissileLauncher" parent="Weapons" instance=ExtResource("10_20voq")]
+position = Vector2(-5, 0)
 
 [node name="Visuals" type="Node2D" parent="."]
 
@@ -56,6 +70,7 @@ visible = false
 shape = SubResource("CircleShape2D_iarlc")
 
 [node name="PickupArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -63,6 +78,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_uojid")
 
 [node name="AttractionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -71,8 +87,6 @@ shape = SubResource("CircleShape2D_2vbv2")
 
 [node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_s7vg0")]
 health_component = NodePath("../HealthComponent")
-
-[node name="LastHitterComponent" parent="." instance=ExtResource("10_s12ey")]
 
 [connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="AttractionArea" to="." method="_on_attraction_area_area_entered"]

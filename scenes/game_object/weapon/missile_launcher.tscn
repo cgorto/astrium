@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhvrvgt71kv"]
+
+[ext_resource type="Script" path="res://scenes/game_object/weapon/missile_launcher.gd" id="1_h352p"]
+[ext_resource type="PackedScene" uid="uid://dolga7ocahq5x" path="res://scenes/component/projectile_spawner_component.tscn" id="1_m4000"]
+[ext_resource type="PackedScene" uid="uid://cbuvjywj3yrf3" path="res://scenes/component/targeting_component.tscn" id="2_brio6"]
+[ext_resource type="PackedScene" uid="uid://d0v5vba2cndww" path="res://scenes/game_object/projectile/missile.tscn" id="3_4if63"]
+[ext_resource type="PackedScene" uid="uid://been2q7k2hj3i" path="res://scenes/component/range_component.tscn" id="3_6qqaa"]
+[ext_resource type="PackedScene" uid="uid://dk3opf41a8ev" path="res://scenes/component/ammo_component.tscn" id="5_am7np"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i4tth"]
+radius = 500.0
+
+[node name="MissileLauncher" type="Node2D"]
+script = ExtResource("1_h352p")
+
+[node name="ProjectileSpawnerComponent" parent="." instance=ExtResource("1_m4000")]
+projectile_scene = ExtResource("3_4if63")
+spread_angle = 0.5
+proj_per_shot = 3
+
+[node name="TargetingComponent" parent="." node_paths=PackedStringArray("range_component") instance=ExtResource("2_brio6")]
+range_component = NodePath("../RangeComponent")
+
+[node name="RangeComponent" parent="." instance=ExtResource("3_6qqaa")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeComponent"]
+shape = SubResource("CircleShape2D_i4tth")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="AmmoComponent" parent="." instance=ExtResource("5_am7np")]

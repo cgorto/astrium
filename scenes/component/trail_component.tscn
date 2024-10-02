@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cm0gcg1tcv76f"]
+
+[ext_resource type="Script" path="res://scenes/component/trail_component.gd" id="1_rkpqs"]
+
+[sub_resource type="Curve" id="Curve_rt2oj"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_y1p7t"]
+offsets = PackedFloat32Array(0, 0.68, 0.993333)
+colors = PackedColorArray(1, 1, 0, 0.207843, 0.917647, 0.443137, 0.545098, 0.45098, 0.278431, 0.2, 1, 1)
+
+[node name="TrailComponent" type="Line2D"]
+show_behind_parent = true
+points = PackedVector2Array(0, 0, 32, 0)
+width_curve = SubResource("Curve_rt2oj")
+gradient = SubResource("Gradient_y1p7t")
+script = ExtResource("1_rkpqs")

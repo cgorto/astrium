@@ -11,4 +11,5 @@ func _physics_process(delta: float) -> void:
 		current_speed += 20
 
 func pickup() -> void:
-	pass
+	GameEvents.resource_collected.emit(value)
+	queue_free()

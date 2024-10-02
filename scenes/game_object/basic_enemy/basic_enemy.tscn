@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwegtty4ubuew"]
+[gd_scene load_steps=15 format=3 uid="uid://cwegtty4ubuew"]
 
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_1t0vd"]
 [ext_resource type="Script" path="res://scenes/game_object/basic_enemy/basic_enemy.gd" id="1_m3ob5"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://c7rtcedycu7kt" path="res://scenes/component/hurtbox_component.tscn" id="4_moee5"]
 [ext_resource type="PackedScene" uid="uid://dhm4vdomkwy7m" path="res://scenes/component/health_bar_component.tscn" id="6_qd6uc"]
 [ext_resource type="Texture2D" uid="uid://ba1cm1a108pbq" path="res://scenes/game_object/basic_enemy/ship_0005.png" id="6_vptd1"]
+[ext_resource type="PackedScene" uid="uid://nykeratlgruo" path="res://scenes/component/movement_component/movement_component.tscn" id="9_op5ce"]
+[ext_resource type="Script" path="res://scenes/component/movement_component/orbit_player_movement_component.gd" id="10_8xe8m"]
+[ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="11_vpl1m"]
+[ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="12_ask5m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dvb6p"]
 
@@ -16,6 +20,9 @@
 [node name="BasicEnemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_m3ob5")
+
+[node name="TrailComponent" parent="." instance=ExtResource("12_ask5m")]
+is_emitting = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_1t0vd")]
 max_health = 200
@@ -26,6 +33,7 @@ health_component = NodePath("../HealthComponent")
 gold_scene = ExtResource("4_8uwfm")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_qc8h4")]
+max_speed = 400
 
 [node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_qd6uc")]
 health_component = NodePath("../HealthComponent")
@@ -39,7 +47,18 @@ shape = SubResource("CircleShape2D_dvb6p")
 [node name="Visuals" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+rotation = 1.5708
 texture = ExtResource("6_vptd1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_64img")
+
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("9_op5ce")]
+script = ExtResource("10_8xe8m")
+orbit_distance = 500
+transition_range = 150.0
+velocity_component = NodePath("../VelocityComponent")
+
+[node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("11_vpl1m")]
+pivot_node = NodePath("../Visuals")
+rotation_speed = 20.0
