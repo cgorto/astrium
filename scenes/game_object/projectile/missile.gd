@@ -3,7 +3,7 @@ class_name Missile extends Node2D
 @onready var velocity_component: VelocityComponent = $VelocityComponent
 @onready var rotation_component: RotationComponent = $RotationComponent
 @onready var targeting_component: TargetingComponent = $TargetingComponent
-@onready var aoe_component: AOEComponent = $AOEComponent
+@onready var basic_spawner_component: BasicSpawnerComponent = $BasicSpawnerComponent
 
 var initial_speed: int = 10
 
@@ -25,5 +25,5 @@ func _on_hitbox_component_hit(thing_hit: Node2D) -> void:
 
 
 func explode() -> void:
-	aoe_component.spawn_aoe.call_deferred()
+	basic_spawner_component.spawn.call_deferred()
 	queue_free()

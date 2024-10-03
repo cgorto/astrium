@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwegtty4ubuew"]
+[gd_scene load_steps=16 format=3 uid="uid://cwegtty4ubuew"]
 
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_1t0vd"]
 [ext_resource type="Script" path="res://scenes/game_object/basic_enemy/basic_enemy.gd" id="1_m3ob5"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="12_ask5m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dvb6p"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dkhau"]
+polygon = PackedVector2Array(8, -15, 8, 15, -3, 15, -10, 2, -10, -2, -2, -15, 8, -15)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_64img"]
 
@@ -49,6 +52,9 @@ shape = SubResource("CircleShape2D_dvb6p")
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 rotation = 1.5708
 texture = ExtResource("6_vptd1")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Visuals"]
+occluder = SubResource("OccluderPolygon2D_dkhau")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_64img")

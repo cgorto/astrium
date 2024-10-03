@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmvf1i0fup5ch"]
+[gd_scene load_steps=10 format=3 uid="uid://bmvf1i0fup5ch"]
 
 [ext_resource type="Script" path="res://scenes/game_object/weapon/gun.gd" id="1_hknbi"]
 [ext_resource type="PackedScene" uid="uid://dolga7ocahq5x" path="res://scenes/component/projectile_spawner_component.tscn" id="1_v0l1u"]
-[ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="1_xj12a"]
+[ext_resource type="Texture2D" uid="uid://cx0eonlr002og" path="res://assets/tiles.png" id="2_hnw7o"]
 [ext_resource type="PackedScene" uid="uid://b7dgn2u83lt4v" path="res://scenes/game_object/projectile/projectile.tscn" id="2_kmtcr"]
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="3_2rg7f"]
 [ext_resource type="PackedScene" uid="uid://been2q7k2hj3i" path="res://scenes/component/range_component.tscn" id="4_tk0hh"]
 [ext_resource type="PackedScene" uid="uid://cbuvjywj3yrf3" path="res://scenes/component/targeting_component.tscn" id="5_msr53"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0mxn"]
+atlas = ExtResource("2_hnw7o")
+region = Rect2(105, 17, 10, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oy55j"]
 
@@ -16,13 +20,11 @@ script = ExtResource("1_hknbi")
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-position = Vector2(10, 0)
-rotation = 1.5708
-scale = Vector2(0.03125, 0.152344)
-texture = ExtResource("1_xj12a")
+rotation = -1.5708
+texture = SubResource("AtlasTexture_f0mxn")
 
 [node name="Marker2D" type="Marker2D" parent="Pivot"]
-position = Vector2(19, 0)
+position = Vector2(6, 0)
 
 [node name="ProjectileSpawnerComponent" parent="." node_paths=PackedStringArray("spawn_offset", "rotation_component") instance=ExtResource("1_v0l1u")]
 projectile_scene = ExtResource("2_kmtcr")
