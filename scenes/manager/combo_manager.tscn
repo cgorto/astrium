@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmrimrn513ge7"]
+
+[ext_resource type="Script" path="res://scenes/manager/combo_manager.gd" id="1_jaxmp"]
+
+[node name="ComboManager" type="Node" groups=["combo"]]
+script = ExtResource("1_jaxmp")
+
+[node name="Timer" type="Timer" parent="."]

@@ -29,6 +29,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				var collider: Area2D = collision.collider
 				if collider is LastHitOrb:
 					collider.last_hit()
+					GameEvents.last_hit.emit(true)
+				else:
+					GameEvents.last_hit.emit(false)
+		else:
+			GameEvents.last_hit.emit(false)
 
 func _process(delta: float) -> void:
 	if line.visible:

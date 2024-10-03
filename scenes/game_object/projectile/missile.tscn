@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0v5vba2cndww"]
+[gd_scene load_steps=12 format=3 uid="uid://d0v5vba2cndww"]
 
 [ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="1_flc1l"]
 [ext_resource type="Script" path="res://scenes/game_object/projectile/missile.gd" id="1_ndat8"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="4_2obxo"]
 [ext_resource type="Texture2D" uid="uid://cx0eonlr002og" path="res://assets/tiles.png" id="5_0hebo"]
 [ext_resource type="PackedScene" uid="uid://lepdapn4l4b4" path="res://scenes/component/hitbox_component.tscn" id="5_aob0v"]
-[ext_resource type="Texture2D" uid="uid://bu2eyxhyb6u07" path="res://assets/2d_lights_and_shadows_neutral_point_light.webp" id="6_5xjxk"]
 [ext_resource type="PackedScene" uid="uid://dd8uaje5u4kvn" path="res://scenes/component/basic_spawn_component.tscn" id="7_ic24g"]
 [ext_resource type="PackedScene" uid="uid://dysgtck1tag0j" path="res://scenes/game_object/aoe/aoe.tscn" id="9_hpp5f"]
 
@@ -39,11 +38,6 @@ lifetime = 0.3
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 rotation = 1.5708
 texture = SubResource("AtlasTexture_gj0mt")
-
-[node name="PointLight2D" type="PointLight2D" parent="Pivot"]
-energy = 0.28
-shadow_enabled = true
-texture = ExtResource("6_5xjxk")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

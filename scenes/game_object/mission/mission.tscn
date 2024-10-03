@@ -1,0 +1,32 @@
+[gd_scene load_steps=10 format=3 uid="uid://heil2ottumvp"]
+
+[ext_resource type="Script" path="res://scenes/game_object/mission/mission.gd" id="1_1fb5i"]
+[ext_resource type="PackedScene" uid="uid://dplusmn3dfkw" path="res://scenes/manager/enemy_manager.tscn" id="2_og03e"]
+[ext_resource type="PackedScene" uid="uid://cosksya8rw27g" path="res://scenes/game_object/player/player.tscn" id="3_56j2l"]
+[ext_resource type="PackedScene" uid="uid://dd44rd407xwcb" path="res://scenes/manager/mission_resource_manager.tscn" id="3_hht4x"]
+[ext_resource type="PackedScene" uid="uid://dsxt82vvu5rf8" path="res://scenes/game_object/basic_enemy/basic_enemy.tscn" id="3_oe8bj"]
+[ext_resource type="PackedScene" uid="uid://cwegtty4ubuew" path="res://scenes/game_object/boss/boss.tscn" id="4_3cdid"]
+[ext_resource type="PackedScene" uid="uid://dmrimrn513ge7" path="res://scenes/manager/combo_manager.tscn" id="5_cpxpl"]
+[ext_resource type="PackedScene" uid="uid://ducyiodxhrulk" path="res://scenes/manager/mission_difficulty_manager.tscn" id="7_eg354"]
+[ext_resource type="PackedScene" uid="uid://dlfc5og5bfq2w" path="res://scenes/game_object/game_camera/game_camera.tscn" id="8_cpu8a"]
+
+[node name="Mission" type="Node"]
+script = ExtResource("1_1fb5i")
+
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("enemy_container") instance=ExtResource("2_og03e")]
+enemy_scene = ExtResource("3_oe8bj")
+boss_scene = ExtResource("4_3cdid")
+boss_threshold = 5
+enemy_container = NodePath("../Entities")
+
+[node name="ComboManager" parent="." instance=ExtResource("5_cpxpl")]
+
+[node name="MissionResourceManager" parent="." instance=ExtResource("3_hht4x")]
+
+[node name="MissionDifficultyManager" parent="." instance=ExtResource("7_eg354")]
+
+[node name="GameCamera" parent="." instance=ExtResource("8_cpu8a")]
+
+[node name="Entities" type="Node2D" parent="." groups=["entities_layer"]]
+
+[node name="Player" parent="Entities" instance=ExtResource("3_56j2l")]

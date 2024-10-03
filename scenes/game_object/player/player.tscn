@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cosksya8rw27g"]
+[gd_scene load_steps=17 format=3 uid="uid://cosksya8rw27g"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_7hsfj"]
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_37tc3"]
@@ -14,9 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://du42tp6lyy417" path="res://scenes/component/last_hitter_component.tscn" id="10_s12ey"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75bju"]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_twqqk"]
-polygon = PackedVector2Array(9, -12, 9, 12, 0, 12, -10, 2, -10, -2, 0, -12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iarlc"]
 
@@ -67,9 +64,6 @@ position = Vector2(-5, 0)
 [node name="Sprite2D" type="Sprite2D" parent="Visuals"]
 rotation = 1.5708
 texture = ExtResource("4_ik7p1")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Visuals"]
-occluder = SubResource("OccluderPolygon2D_twqqk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

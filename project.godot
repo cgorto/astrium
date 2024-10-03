@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="FleetSurvivors"
-run/main_scene="res://_test_scene.tscn"
+config/name="Astrium"
+run/main_scene="res://scenes/game_object/mission/mission.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,10 @@ gdscript/warnings/untyped_declaration=2
 [dotnet]
 
 project/assembly_name="FleetSurvivors"
+
+[editor]
+
+movie_writer/movie_file="F:/GameDev/fleetsurvivors/movie/test.avi"
 
 [input]
 

@@ -5,8 +5,10 @@ signal died(thing_died: Node2D)
 signal health_changed
 signal health_decreased
 
+ 
 @export var max_health: int = 10
 var current_health: int
+
 
 func _ready() -> void:
 	current_health = max_health
