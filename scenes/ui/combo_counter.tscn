@@ -1,6 +1,9 @@
-[gd_scene format=3 uid="uid://ba1tdjv7yg85r"]
+[gd_scene load_steps=2 format=3 uid="uid://ba1tdjv7yg85r"]
+
+[ext_resource type="Script" path="res://scenes/ui/combo_counter.gd" id="1_bhsvc"]
 
 [node name="ComboCounter" type="CanvasLayer"]
+script = ExtResource("1_bhsvc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchors_preset = 15

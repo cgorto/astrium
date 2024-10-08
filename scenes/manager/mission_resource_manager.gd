@@ -1,5 +1,7 @@
 class_name MissionResourceManager extends Node
 
+signal resource_updated(new_amt: int)
+
 @export var death_mult: float = 0.0
 @export var leave_early_mult: float = 0.5
 
@@ -11,7 +13,7 @@ func _ready() -> void:
 
 func add_resources(amount: int) -> void:
 	collected_resources += amount
-	print(collected_resources)
+	resource_updated.emit(collected_resources)
 
 func clear_resources() -> void:
 	collected_resources = 0

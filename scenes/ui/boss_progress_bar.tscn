@@ -21,4 +21,5 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_e5egb")
-value = 41.74
+max_value = 1.0
+value = 0.5

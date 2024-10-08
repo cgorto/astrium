@@ -1,0 +1,26 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcxqqrjbvepdj"]
+
+[ext_resource type="Script" path="res://scenes/game_object/weapon/hangar.gd" id="1_78oqg"]
+[ext_resource type="PackedScene" uid="uid://cbuvjywj3yrf3" path="res://scenes/component/targeting_component.tscn" id="2_x8wkb"]
+[ext_resource type="PackedScene" uid="uid://been2q7k2hj3i" path="res://scenes/component/range_component.tscn" id="3_oon1e"]
+[ext_resource type="PackedScene" uid="uid://dd8uaje5u4kvn" path="res://scenes/component/basic_spawn_component.tscn" id="4_sg0ig"]
+[ext_resource type="PackedScene" uid="uid://fue3kq8kjnge" path="res://scenes/game_object/weapon/minion/minion.tscn" id="5_c04m4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t1dvd"]
+
+[node name="Hangar" type="Node2D"]
+script = ExtResource("1_78oqg")
+
+[node name="TargetingComponent" parent="." instance=ExtResource("2_x8wkb")]
+
+[node name="RangeComponent" parent="." instance=ExtResource("3_oon1e")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeComponent"]
+shape = SubResource("CircleShape2D_t1dvd")
+
+[node name="BasicSpawnerComponent" parent="." instance=ExtResource("4_sg0ig")]
+to_spawn_scene = ExtResource("5_c04m4")
+
+[node name="MinionContainer" type="Node" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]

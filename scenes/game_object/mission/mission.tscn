@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://heil2ottumvp"]
+[gd_scene load_steps=13 format=3 uid="uid://heil2ottumvp"]
 
 [ext_resource type="Script" path="res://scenes/game_object/mission/mission.gd" id="1_1fb5i"]
+[ext_resource type="PackedScene" uid="uid://1qy4y6f6k3tu" path="res://scenes/ui/boss_progress_bar.tscn" id="2_g4r0l"]
 [ext_resource type="PackedScene" uid="uid://dplusmn3dfkw" path="res://scenes/manager/enemy_manager.tscn" id="2_og03e"]
+[ext_resource type="PackedScene" uid="uid://c125ajiy1mxbl" path="res://scenes/ui/resource_counter.tscn" id="3_5vm1r"]
 [ext_resource type="PackedScene" uid="uid://cosksya8rw27g" path="res://scenes/game_object/player/player.tscn" id="3_56j2l"]
+[ext_resource type="PackedScene" uid="uid://ba1tdjv7yg85r" path="res://scenes/ui/combo_counter.tscn" id="3_d3k6m"]
 [ext_resource type="PackedScene" uid="uid://dd44rd407xwcb" path="res://scenes/manager/mission_resource_manager.tscn" id="3_hht4x"]
 [ext_resource type="PackedScene" uid="uid://dsxt82vvu5rf8" path="res://scenes/game_object/basic_enemy/basic_enemy.tscn" id="3_oe8bj"]
 [ext_resource type="PackedScene" uid="uid://cwegtty4ubuew" path="res://scenes/game_object/boss/boss.tscn" id="4_3cdid"]
@@ -13,10 +16,19 @@
 [node name="Mission" type="Node"]
 script = ExtResource("1_1fb5i")
 
+[node name="BossProgressBar" parent="." node_paths=PackedStringArray("enemy_manager") instance=ExtResource("2_g4r0l")]
+enemy_manager = NodePath("../EnemyManager")
+
+[node name="ResourceCounter" parent="." node_paths=PackedStringArray("resource_manager") instance=ExtResource("3_5vm1r")]
+resource_manager = NodePath("../MissionResourceManager")
+
+[node name="ComboCounter" parent="." node_paths=PackedStringArray("combo_manager") instance=ExtResource("3_d3k6m")]
+combo_manager = NodePath("../ComboManager")
+
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("enemy_container") instance=ExtResource("2_og03e")]
 enemy_scene = ExtResource("3_oe8bj")
 boss_scene = ExtResource("4_3cdid")
-boss_threshold = 5
+boss_threshold = 10
 enemy_container = NodePath("../Entities")
 
 [node name="ComboManager" parent="." instance=ExtResource("5_cpxpl")]

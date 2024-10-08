@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://c125ajiy1mxbl"]
+
+[ext_resource type="Script" path="res://scenes/ui/resource_counter.gd" id="1_jsvlh"]
+
+[node name="ResourceCounter" type="CanvasLayer"]
+script = ExtResource("1_jsvlh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Astrium:"
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "52"

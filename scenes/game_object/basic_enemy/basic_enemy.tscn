@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c7rtcedycu7kt" path="res://scenes/component/hurtbox_component.tscn" id="4_moee5"]
 [ext_resource type="PackedScene" uid="uid://dhm4vdomkwy7m" path="res://scenes/component/health_bar_component.tscn" id="6_qd6uc"]
 [ext_resource type="PackedScene" uid="uid://nykeratlgruo" path="res://scenes/component/movement_component/movement_component.tscn" id="9_op5ce"]
-[ext_resource type="Texture2D" uid="uid://bkvn0cgvkb5ua" path="res://scenes/game_object/basic_enemy/ship_0005.png" id="9_skt1x"]
+[ext_resource type="Texture2D" uid="uid://ba1cm1a108pbq" path="res://scenes/game_object/basic_enemy/ship_0005.png" id="9_skt1x"]
 [ext_resource type="Script" path="res://scenes/component/movement_component/orbit_player_movement_component.gd" id="10_8xe8m"]
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="11_vpl1m"]
 [ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="12_ask5m"]

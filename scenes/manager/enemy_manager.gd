@@ -1,4 +1,6 @@
-extends Node
+class_name EnemyManager extends Node
+
+signal boss_progress_updated(current_progress: int, target_progress: int)
 
 var spawn_radius: int = 500
 
@@ -60,3 +62,4 @@ func on_resource_collected(amt: int) -> void:
 		var boss: Node2D = boss_scene.instantiate()
 		boss.global_position = get_spawn_position()
 		enemy_container.add_child.call_deferred(boss)
+	boss_progress_updated.emit(current_boss_threshold,boss_threshold)
