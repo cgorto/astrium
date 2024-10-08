@@ -21,7 +21,7 @@ func spawn_projectile() -> Array[Node2D]:
 	var main:Node = get_tree().current_scene
 	var projs_spawned: Array[Node2D]
 	
-	for i in range(proj_per_shot):
+	for i in proj_per_shot:
 		var projectile_instance: Node2D = projectile_scene.instantiate() as Node2D
 		projectile_instance.global_position = spawn_position
 		projectile_instance.rotation = rotation

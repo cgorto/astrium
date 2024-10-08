@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlhs5usxgosa1"]
+[gd_scene load_steps=12 format=3 uid="uid://dlhs5usxgosa1"]
 
 [ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="1_dut1u"]
 [ext_resource type="Script" path="res://scenes/game_object/last_hit_orb/last_hit_orb.gd" id="1_t43fb"]
@@ -6,6 +6,28 @@
 [ext_resource type="PackedScene" uid="uid://wxellcjqsidr" path="res://scenes/game_object/gold/gold.tscn" id="4_ehtn0"]
 [ext_resource type="PackedScene" uid="uid://3m23b2v7bw1k" path="res://scenes/component/drop_on_death_component.tscn" id="4_o0lko"]
 [ext_resource type="Texture2D" uid="uid://kmdyoni6cqu2" path="res://icon.svg" id="6_5c26e"]
+[ext_resource type="Shader" path="res://scenes/game_object/last_hit_orb/last_hit_orb.gdshader" id="6_28khc"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2omjn"]
+noise_type = 0
+frequency = 0.0291
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_igkkv"]
+noise = SubResource("FastNoiseLite_2omjn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mh3u3"]
+shader = ExtResource("6_28khc")
+shader_parameter/color_inner = Color(0.8, 0.2, 0.8, 1)
+shader_parameter/color_outer = Color(0.2, 0.4, 1, 1)
+shader_parameter/inner_radius = 0.578
+shader_parameter/outer_radius = 1.0
+shader_parameter/edge_softness = 0.094
+shader_parameter/flow_speed = 2.0
+shader_parameter/distortion_strength = 0.105
+shader_parameter/goo_frequency = 10.0
+shader_parameter/time_scale = 1.825
+shader_parameter/surface_tension = 0.183
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_igkkv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y8a4b"]
 radius = 21.095
@@ -27,11 +49,21 @@ gold_scene = ExtResource("4_ehtn0")
 max_speed = 400
 acceleration = 2.0
 
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mh3u3")
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+mouse_filter = 2
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.215, 0.215)
 texture = ExtResource("6_5c26e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_y8a4b")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
