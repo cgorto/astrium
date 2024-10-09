@@ -1,17 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://fue3kq8kjnge"]
+[gd_scene load_steps=16 format=3 uid="uid://fue3kq8kjnge"]
 
+[ext_resource type="Script" path="res://scenes/game_object/weapon/minion/gun_minion.gd" id="1_2sy52"]
 [ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="1_mqs5a"]
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="2_0pldf"]
 [ext_resource type="PackedScene" uid="uid://bg3se6ow6a6si" path="res://scenes/component/velocity_component.tscn" id="3_bfn6s"]
 [ext_resource type="PackedScene" uid="uid://c7rtcedycu7kt" path="res://scenes/component/hurtbox_component.tscn" id="4_2qf2f"]
 [ext_resource type="Texture2D" uid="uid://dainb8xxsqphi" path="res://assets/ships.png" id="5_q5pf6"]
 [ext_resource type="PackedScene" uid="uid://nykeratlgruo" path="res://scenes/component/movement_component/movement_component.tscn" id="6_mce65"]
-[ext_resource type="Script" path="res://scenes/component/movement_component/orbit_player_movement_component.gd" id="7_xfo8m"]
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="8_dp1xw"]
 [ext_resource type="Script" path="res://scenes/component/targeting_component.gd" id="9_38h0v"]
-[ext_resource type="Script" path="res://scenes/component/range_component.gd" id="10_j8yo8"]
 [ext_resource type="PackedScene" uid="uid://dolga7ocahq5x" path="res://scenes/component/projectile_spawner_component.tscn" id="10_q7gse"]
 [ext_resource type="PackedScene" uid="uid://b7dgn2u83lt4v" path="res://scenes/game_object/projectile/projectile.tscn" id="11_ewi30"]
+[ext_resource type="PackedScene" uid="uid://dk3opf41a8ev" path="res://scenes/component/ammo_component.tscn" id="13_0qwil"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7qay6"]
 
@@ -21,10 +21,9 @@ region = Rect2(72, 74, 20, 17)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_esy5a"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qr6va"]
-
 [node name="Gun Minion" type="CharacterBody2D"]
 motion_mode = 1
+script = ExtResource("1_2sy52")
 
 [node name="TrailComponent" parent="." instance=ExtResource("1_mqs5a")]
 is_emitting = true
@@ -51,25 +50,17 @@ texture = SubResource("AtlasTexture_85wog")
 shape = SubResource("CircleShape2D_esy5a")
 
 [node name="MovementComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_mce65")]
-script = ExtResource("7_xfo8m")
-orbit_distance = 500
-transition_range = 150.0
 velocity_component = NodePath("../VelocityComponent")
 
 [node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("8_dp1xw")]
 pivot_node = NodePath("../Visuals")
 rotation_speed = 20.0
 
-[node name="TargetingComponent" type="Node" parent="." node_paths=PackedStringArray("range_component")]
+[node name="TargetingComponent" type="Node" parent="."]
 script = ExtResource("9_38h0v")
-range_component = NodePath("../RangeComponent")
 
 [node name="ProjectileSpawnerComponent" parent="." node_paths=PackedStringArray("rotation_component") instance=ExtResource("10_q7gse")]
 projectile_scene = ExtResource("11_ewi30")
 rotation_component = NodePath("../RotationComponent")
 
-[node name="RangeComponent" type="Area2D" parent="."]
-script = ExtResource("10_j8yo8")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeComponent"]
-shape = SubResource("CircleShape2D_qr6va")
+[node name="AmmoComponent" parent="." instance=ExtResource("13_0qwil")]
