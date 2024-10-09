@@ -24,8 +24,9 @@ region = Rect2(72, 74, 20, 17)
 [sub_resource type="CircleShape2D" id="CircleShape2D_esy5a"]
 
 [node name="Gun Minion" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 2
+top_level = true
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_2sy52")
 
@@ -78,7 +79,6 @@ rotation_component = NodePath("../RotationComponent")
 proj_speed = 1000
 
 [node name="AmmoComponent" parent="." instance=ExtResource("13_0qwil")]
-max_ammo = 50
 
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.2
