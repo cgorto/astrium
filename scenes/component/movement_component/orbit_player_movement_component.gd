@@ -1,4 +1,4 @@
-extends MovementComponent
+class_name OrbitPlayerMovementComponent extends MovementComponent
 
 @export var orbit_distance: int = 500
 @export var transition_range: float = 150

@@ -30,12 +30,12 @@ func on_died(thing_died: Node2D) -> void:
 		
 	var spawn_position: Vector2 = (owner as Node2D).global_position
 	var multi_drop_loop: int = multi_drop_amt if multi_drop else 1
-	if combo_manager:
-		multi_drop_loop * (combo_manager.combo + 1)
+	if combo_manager && multi_drop:
+		multi_drop_loop *= (combo_manager.combo + 1)
 	var entities_layer: Node = get_tree().current_scene
 	for i in multi_drop_loop:
 		
 		var gold_instance: Node2D = gold_scene.instantiate() as Node2D
 		entities_layer.add_child(gold_instance)
-		gold_instance.global_position = spawn_position + Vector2.RIGHT.rotated(randf()*TAU) * 50
+		gold_instance.global_position = spawn_position + Vector2.RIGHT.rotated(randf()*TAU) * randf_range(0,50)
 	has_dropped = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://fue3kq8kjnge"]
+[gd_scene load_steps=18 format=3 uid="uid://fue3kq8kjnge"]
 
 [ext_resource type="Script" path="res://scenes/game_object/weapon/minion/gun_minion.gd" id="1_2sy52"]
 [ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="1_mqs5a"]
@@ -8,10 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://dainb8xxsqphi" path="res://assets/ships.png" id="5_q5pf6"]
 [ext_resource type="PackedScene" uid="uid://nykeratlgruo" path="res://scenes/component/movement_component/movement_component.tscn" id="6_mce65"]
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="8_dp1xw"]
+[ext_resource type="Script" path="res://scenes/component/movement_component/gun_minion_movement_component.gd" id="8_ife8j"]
 [ext_resource type="Script" path="res://scenes/component/targeting_component.gd" id="9_38h0v"]
 [ext_resource type="PackedScene" uid="uid://dolga7ocahq5x" path="res://scenes/component/projectile_spawner_component.tscn" id="10_q7gse"]
 [ext_resource type="PackedScene" uid="uid://b7dgn2u83lt4v" path="res://scenes/game_object/projectile/projectile.tscn" id="11_ewi30"]
 [ext_resource type="PackedScene" uid="uid://dk3opf41a8ev" path="res://scenes/component/ammo_component.tscn" id="13_0qwil"]
+[ext_resource type="PackedScene" uid="uid://dhm4vdomkwy7m" path="res://scenes/component/health_bar_component.tscn" id="14_y3qeb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7qay6"]
 
@@ -22,6 +24,8 @@ region = Rect2(72, 74, 20, 17)
 [sub_resource type="CircleShape2D" id="CircleShape2D_esy5a"]
 
 [node name="Gun Minion" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_2sy52")
 
@@ -35,6 +39,8 @@ max_health = 200
 max_speed = 400
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_2qf2f")]
+collision_layer = 2
+collision_mask = 2
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
@@ -49,7 +55,14 @@ texture = SubResource("AtlasTexture_85wog")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_esy5a")
 
-[node name="MovementComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("6_mce65")]
+[node name="MovementComponent" parent="." node_paths=PackedStringArray("ammo_component", "targeting_component", "projectile_spawner_component", "velocity_component") instance=ExtResource("6_mce65")]
+script = ExtResource("8_ife8j")
+ammo_component = NodePath("../AmmoComponent")
+targeting_component = NodePath("../TargetingComponent")
+projectile_spawner_component = NodePath("../ProjectileSpawnerComponent")
+orbit_distance = 200
+too_close = 100
+transition_range = 150.0
 velocity_component = NodePath("../VelocityComponent")
 
 [node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("8_dp1xw")]
@@ -62,5 +75,14 @@ script = ExtResource("9_38h0v")
 [node name="ProjectileSpawnerComponent" parent="." node_paths=PackedStringArray("rotation_component") instance=ExtResource("10_q7gse")]
 projectile_scene = ExtResource("11_ewi30")
 rotation_component = NodePath("../RotationComponent")
+proj_speed = 1000
 
 [node name="AmmoComponent" parent="." instance=ExtResource("13_0qwil")]
+max_ammo = 50
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("14_y3qeb")]
+health_component = NodePath("../HealthComponent")

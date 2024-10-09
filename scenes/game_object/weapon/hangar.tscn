@@ -8,19 +8,49 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1dvd"]
 
-[node name="Hangar" type="Node2D"]
+[node name="Hangar" type="Node2D" node_paths=PackedStringArray("current_minions")]
 script = ExtResource("1_78oqg")
+current_minions = [NodePath("MinionContainer/Gun Minion"), NodePath("MinionContainer/Gun Minion2"), NodePath("MinionContainer/Gun Minion3"), NodePath("MinionContainer/Gun Minion4")]
 
-[node name="TargetingComponent" parent="." instance=ExtResource("2_x8wkb")]
+[node name="TargetingComponent" parent="." node_paths=PackedStringArray("range_component") instance=ExtResource("2_x8wkb")]
+range_component = NodePath("../RangeComponent")
 
 [node name="RangeComponent" parent="." instance=ExtResource("3_oon1e")]
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeComponent"]
 shape = SubResource("CircleShape2D_t1dvd")
 
-[node name="BasicSpawnerComponent" parent="." instance=ExtResource("4_sg0ig")]
+[node name="BasicSpawnerComponent" parent="." node_paths=PackedStringArray("spawn_container") instance=ExtResource("4_sg0ig")]
 to_spawn_scene = ExtResource("5_c04m4")
+spawn_container = NodePath("")
 
-[node name="MinionContainer" type="Node" parent="."]
+[node name="MinionContainer" type="Node2D" parent="."]
+
+[node name="Gun Minion" parent="MinionContainer" instance=ExtResource("5_c04m4")]
+top_level = true
+position = Vector2(45, 60)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Gun Minion2" parent="MinionContainer" instance=ExtResource("5_c04m4")]
+top_level = true
+position = Vector2(159, 176)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Gun Minion3" parent="MinionContainer" instance=ExtResource("5_c04m4")]
+top_level = true
+position = Vector2(406, 72)
+collision_layer = 1
+collision_mask = 1
+
+[node name="Gun Minion4" parent="MinionContainer" instance=ExtResource("5_c04m4")]
+top_level = true
+position = Vector2(288, 345)
+collision_layer = 1
+collision_mask = 1
 
 [node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="target_changed" from="TargetingComponent" to="." method="_on_targeting_component_target_changed"]

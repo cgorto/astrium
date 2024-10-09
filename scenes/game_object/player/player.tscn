@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cosksya8rw27g"]
+[gd_scene load_steps=19 format=3 uid="uid://cosksya8rw27g"]
 
 [ext_resource type="Script" path="res://scenes/game_object/player/player.gd" id="1_7hsfj"]
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_37tc3"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="6_22yo7"]
 [ext_resource type="PackedScene" uid="uid://dhm4vdomkwy7m" path="res://scenes/component/health_bar_component.tscn" id="9_s7vg0"]
 [ext_resource type="PackedScene" uid="uid://bhvrvgt71kv" path="res://scenes/game_object/weapon/missile_launcher.tscn" id="10_20voq"]
+[ext_resource type="PackedScene" uid="uid://dcxqqrjbvepdj" path="res://scenes/game_object/weapon/hangar.tscn" id="10_q5n2i"]
 [ext_resource type="PackedScene" uid="uid://du42tp6lyy417" path="res://scenes/component/last_hitter_component.tscn" id="10_s12ey"]
 [ext_resource type="PackedScene" uid="uid://bmvf1i0fup5ch" path="res://scenes/game_object/weapon/gun.tscn" id="11_00j5r"]
 
@@ -56,6 +57,8 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_75bju")
 
 [node name="Weapons" type="Node2D" parent="."]
+
+[node name="Hangar" parent="Weapons" instance=ExtResource("10_q5n2i")]
 
 [node name="Gun" parent="Weapons" instance=ExtResource("11_00j5r")]
 z_index = 1
