@@ -30,4 +30,3 @@ func spawn_projectile() -> Array[Node2D]:
 		projectile_instance.velocity_component.velocity = Vector2.RIGHT.rotated(rotation + rand_spread) * proj_speed
 		projs_spawned.append(projectile_instance)
 	return projs_spawned
-		#
