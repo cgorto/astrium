@@ -5,16 +5,6 @@ class_name VelocityComponent extends Node
 
 var velocity: Vector2 = Vector2.ZERO
 
-func accelerate_to_player() -> void:
-	var owner_node2d: = owner as Node2D
-	if owner_node2d == null:
-		return
-	var player: = get_tree().get_first_node_in_group("player") as Node2D
-	if player == null:
-		return
-	var direction: Vector2 = (player.global_position - owner_node2d.global_position).normalized()
-	accelerate_in_direction(direction)
-	
 
 func accelerate_in_direction(direction: Vector2) -> void:
 	

@@ -16,8 +16,9 @@ func _on_targeting_component_target_changed(new_target: Node2D) -> void:
 func _on_reload_area_area_entered(area: Area2D) -> void:
 	if area is HurtboxComponent:
 		if area.owner in current_minions:
+			#check if ammo out
 			start_reload(area.owner)
-			print("hehe")
+
 
 func start_reload(to_reload: Node2D) -> void:
 	pass

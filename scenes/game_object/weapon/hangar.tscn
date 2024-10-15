@@ -30,28 +30,16 @@ spawn_container = NodePath("../MinionContainer")
 [node name="MinionContainer" type="Node2D" parent="."]
 
 [node name="Gun Minion" parent="MinionContainer" instance=ExtResource("5_c04m4")]
-top_level = true
 position = Vector2(45, 60)
-collision_layer = 0
-collision_mask = 0
 
 [node name="Gun Minion2" parent="MinionContainer" instance=ExtResource("5_c04m4")]
-top_level = true
 position = Vector2(159, 176)
-collision_layer = 0
-collision_mask = 0
 
 [node name="Gun Minion3" parent="MinionContainer" instance=ExtResource("5_c04m4")]
-top_level = true
 position = Vector2(406, 72)
-collision_layer = 0
-collision_mask = 0
 
 [node name="Gun Minion4" parent="MinionContainer" instance=ExtResource("5_c04m4")]
-top_level = true
 position = Vector2(288, 345)
-collision_layer = 0
-collision_mask = 0
 
 [node name="SpawnTimer" type="Timer" parent="."]
 autostart = true
