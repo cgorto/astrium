@@ -20,3 +20,7 @@ func get_movement() -> Vector2:
 		return -radial
 	else:
 		return lerp(tangential, radial, t)
+
+
+func test() -> Vector2:
+	return Vector2.ZERO

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bemx5b5stcgg0"]
+
+[ext_resource type="Script" path="res://scenes/component/steering_component/steering_component.gd" id="1_saruk"]
+
+[node name="SteeringComponent" type="Node"]
+script = ExtResource("1_saruk")

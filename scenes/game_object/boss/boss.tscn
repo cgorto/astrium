@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cwegtty4ubuew"]
+[gd_scene load_steps=14 format=3 uid="uid://cwegtty4ubuew"]
 
 [ext_resource type="PackedScene" uid="uid://dmtst8fnji83l" path="res://scenes/component/health_component.tscn" id="1_1t0vd"]
 [ext_resource type="Script" path="res://scenes/game_object/boss/boss.gd" id="1_m3ob5"]
@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dlhs5usxgosa1" path="res://scenes/game_object/last_hit_orb/last_hit_orb.tscn" id="4_8uwfm"]
 [ext_resource type="PackedScene" uid="uid://c7rtcedycu7kt" path="res://scenes/component/hurtbox_component.tscn" id="4_moee5"]
 [ext_resource type="PackedScene" uid="uid://dhm4vdomkwy7m" path="res://scenes/component/health_bar_component.tscn" id="6_qd6uc"]
-[ext_resource type="PackedScene" uid="uid://nykeratlgruo" path="res://scenes/component/movement_component/movement_component.tscn" id="9_op5ce"]
 [ext_resource type="Texture2D" uid="uid://bhsr0p7cb8ks1" path="res://scenes/game_object/boss/ship_0003.png" id="9_racpd"]
-[ext_resource type="Script" path="res://scenes/component/movement_component/orbit_player_movement_component.gd" id="10_8xe8m"]
+[ext_resource type="PackedScene" uid="uid://ojcqxe0ojag5" path="res://scenes/component/movement_component/enemy_movement_component.tscn" id="11_5pl28"]
 [ext_resource type="PackedScene" uid="uid://dy1ukbli5hfms" path="res://scenes/component/rotation_component.tscn" id="11_vpl1m"]
 [ext_resource type="PackedScene" uid="uid://cm0gcg1tcv76f" path="res://scenes/component/trail_component.tscn" id="12_ask5m"]
 
@@ -53,12 +52,9 @@ texture = ExtResource("9_racpd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_64img")
 
-[node name="MovementComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("9_op5ce")]
-script = ExtResource("10_8xe8m")
-orbit_distance = 500
-transition_range = 150.0
-velocity_component = NodePath("../VelocityComponent")
-
 [node name="RotationComponent" parent="." node_paths=PackedStringArray("pivot_node") instance=ExtResource("11_vpl1m")]
 pivot_node = NodePath("../Visuals")
 rotation_speed = 20.0
+
+[node name="EnemyMovementComponent" parent="." node_paths=PackedStringArray("velocity_component") instance=ExtResource("11_5pl28")]
+velocity_component = NodePath("../VelocityComponent")

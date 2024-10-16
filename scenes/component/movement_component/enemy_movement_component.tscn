@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://ojcqxe0ojag5"]
+
+[ext_resource type="Script" path="res://scenes/component/movement_component/enemy_movement_component.gd" id="1_vcj2d"]
+[ext_resource type="PackedScene" uid="uid://bemx5b5stcgg0" path="res://scenes/component/steering_component/steering_component.tscn" id="2_frhgw"]
+[ext_resource type="Script" path="res://scenes/component/steering_component/composite_steering_component.gd" id="3_u2yaj"]
+[ext_resource type="Script" path="res://scenes/component/steering_component/pursue_player_sc.gd" id="4_6lvfl"]
+[ext_resource type="Script" path="res://scenes/component/steering_component/enemy_separation_sc.gd" id="5_u8jfq"]
+[ext_resource type="Script" path="res://scenes/component/steering_component/enemy_cohesion_sc.gd" id="6_1b53q"]
+[ext_resource type="Script" path="res://scenes/component/steering_component/avoid_player_sc.gd" id="7_g6cs1"]
+
+[node name="EnemyMovementComponent" type="Node"]
+script = ExtResource("1_vcj2d")
+
+[node name="Composite" parent="." node_paths=PackedStringArray("steering_components") instance=ExtResource("2_frhgw")]
+script = ExtResource("3_u2yaj")
+steering_components = {
+NodePath("PursuePlayer"): 1.0,
+NodePath("Separation"): 1.5,
+NodePath("Cohesion"): 0.5,
+NodePath("AvoidPlayer"): 1.0
+}
+
+[node name="PursuePlayer" parent="Composite" instance=ExtResource("2_frhgw")]
+script = ExtResource("4_6lvfl")
+max_prediction_time = 1.0
+
+[node name="Separation" parent="Composite" instance=ExtResource("2_frhgw")]
+script = ExtResource("5_u8jfq")
+separation_radius = 100.0
+
+[node name="Cohesion" parent="Composite" instance=ExtResource("2_frhgw")]
+script = ExtResource("6_1b53q")
+cohesion_radius = 100.0
+
+[node name="AvoidPlayer" parent="Composite" instance=ExtResource("2_frhgw")]
+script = ExtResource("7_g6cs1")
+avoidance_radius = 500.0
